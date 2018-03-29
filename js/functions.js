@@ -1,4 +1,5 @@
 var _scannerIsRunning = false;
+var debugDiv = document.getElementById("debug");
 
 function startScanner() {
     Quagga.init({
@@ -80,6 +81,7 @@ function startScanner() {
 
     Quagga.onDetected(function (result) {
         console.log("Barcode detected and processed : [" + result.codeResult.code + "]", result);
+        debugDiv.innerHTML += "[" + result.codeResult.code + "]\n";
     });
 }
 
