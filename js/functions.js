@@ -209,7 +209,11 @@ function start() {
             decoder: {
                 readers : [{
                     format: "ean_reader",
-                    config: {}
+                    config: {
+                        supplements: [
+                            'ean_5_reader', 'ean_2_reader'
+                        ]
+                    }
                 }]
             },
             locate: true
