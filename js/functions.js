@@ -151,7 +151,7 @@ function start() {
         if (App.lastResult !== code) {
             App.lastResult = code;
 
-            var isbn = document.getElementById("readings");
+            var isbn = document.getElementById("isbn");
             isbn.innerHTML += "<li>" + code + "</li>";
 
 
