@@ -194,7 +194,7 @@ function start() {
             inputStream: {
                 type : "LiveStream",
                 constraints: {
-                    width: {min: 640},
+                    width: {min: 320},
                     height: {min: 480},
                     aspectRatio: {min: 1, max: 100},
                     facingMode: "environment" // or user
