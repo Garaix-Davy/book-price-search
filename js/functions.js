@@ -152,7 +152,7 @@ function start() {
             App.lastResult = code;
 
             var isbn = document.getElementById("isbn");
-            isbn.innerHTML += code + "\n";
+            isbn.value += code + "\n";
 
 
             var $node = null, canvas = Quagga.canvas.dom.image;
