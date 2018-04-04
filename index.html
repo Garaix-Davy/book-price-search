@@ -10,17 +10,15 @@
 <body>
   <div id="debug"></div>
   <section id="container" class="container">
-      <h3>The user's camera</h3>
-      <p>If your platform supports the <strong>getUserMedia</strong> API call, you
-          can try the real-time locating and decoding features.
-          Simply allow the page to access your web-cam and point it to a barcode.</p>
-      <p>The various options available allow you to adjust the decoding
-          process to your needs (Type of barcode, resolution, ...)</p>
+      <h1>Book Price Search</h1>
+			<p>Scan a book's barcode and get pricing information from eBay.</p>
+      <p>Active the barcode scanner, or type the ISBN in the field below.</p>
       <div class="controls">
           <fieldset class="input-group">
+							<button class="start" onclick="start()">Start</button>
               <button class="stop">Stop</button>
           </fieldset>
-          <fieldset class="reader-config-group">
+          <!-- <fieldset class="reader-config-group">
               <label>
                   <span>Barcode-Type</span>
                   <select name="decoder_readers">
@@ -42,11 +40,11 @@
                   <span>Resolution (long side)</span>
                   <select name="input-stream_constraints">
                       <option value="320x240">320px</option>
-                      <option selected="selected" value="640x480">640px</option>
+                      <option value="640x480">640px</option>
                       <option value="800x600">800px</option>
                       <option value="1280x720">1280px</option>
                       <option value="1600x960">1600px</option>
-                      <option value="1920x1080">1920px</option>
+                      <option selected="selected" value="1920x1080">1920px</option>
                   </select>
               </label>
               <label>
@@ -86,7 +84,7 @@
                   <span>Torch</span>
                   <input type="checkbox" name="settings_torch" />
               </label>
-          </fieldset>
+          </fieldset> -->
       </div>
       <div id="result_strip">
           <ul class="thumbnails"></ul>

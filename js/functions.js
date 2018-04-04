@@ -1,7 +1,7 @@
 var debugDiv = document.getElementById("debug");
 
 
-$(function() {
+function start() {
     var App = {
         init : function() {
             Quagga.init(this.state, function(err) {
@@ -88,16 +88,16 @@ $(function() {
                 Quagga.stop();
             });
 
-            $(".controls .reader-config-group").on("change", "input, select", function(e) {
-                e.preventDefault();
-                var $target = $(e.target),
-                    value = $target.attr("type") === "checkbox" ? $target.prop("checked") : $target.val(),
-                    name = $target.attr("name"),
-                    state = self._convertNameToState(name);
-
-                console.log("Value of "+ state + " changed to " + value);
-                self.setState(state, value);
-            });
+            // $(".controls .reader-config-group").on("change", "input, select", function(e) {
+            //     e.preventDefault();
+            //     var $target = $(e.target),
+            //         value = $target.attr("type") === "checkbox" ? $target.prop("checked") : $target.val(),
+            //         name = $target.attr("name"),
+            //         state = self._convertNameToState(name);
+            //
+            //     console.log("Value of "+ state + " changed to " + value);
+            //     self.setState(state, value);
+            // });
         },
         _accessByPath: function(obj, path, val) {
             var parts = path.split('.'),
@@ -122,7 +122,7 @@ $(function() {
         },
         detachListeners: function() {
             $(".controls").off("click", "button.stop");
-            $(".controls .reader-config-group").off("change", "input, select");
+            // $(".controls .reader-config-group").off("change", "input, select");
         },
         applySetting: function(setting, value) {
             var track = Quagga.CameraAccess.getActiveTrack();
@@ -208,7 +208,7 @@ $(function() {
             frequency: 10,
             decoder: {
                 readers : [{
-                    format: "code_128_reader",
+                    format: "ean_reader",
                     config: {}
                 }]
             },
@@ -256,4 +256,4 @@ $(function() {
             $("#result_strip ul.thumbnails").prepend($node);
         }
     });
-});
+}
