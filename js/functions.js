@@ -103,7 +103,7 @@ function start() {
                 }
             },
             locator: {
-                patchSize: "small",
+                patchSize: "medium",
                 halfSample: true
             },
             numOfWorkers: 2,
@@ -152,15 +152,11 @@ function start() {
             App.lastResult = code;
 
             var isbn = document.getElementById("isbn");
-            isbn.value += code + "\n";
+            var readings = document.getElementById("readings");
+            isbn.value = code;
+            readings.innerHTML += "<li>" + code + </li>;
 
 
-            var $node = null, canvas = Quagga.canvas.dom.image;
-
-            $node = $('<li><div class="thumbnail"><div class="imgWrapper"><img /></div><div class="caption"><h4 class="code"></h4></div></div></li>');
-            $node.find("img").attr("src", canvas.toDataURL());
-            $node.find("h4.code").html(code);
-            $("#result_strip ul.thumbnails").prepend($node);
         }
     });
 }
