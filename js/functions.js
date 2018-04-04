@@ -154,7 +154,9 @@ function start() {
             var isbn = document.getElementById("isbn");
             var readings = document.getElementById("readings");
             isbn.value = code;
-            readings.innerHTML += "<li>" + code + </li>;
+            readings.innerHTML += "<li>" + code + "</li>";
+
+
 
 
         }
