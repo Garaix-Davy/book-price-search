@@ -151,8 +151,8 @@ function start() {
         if (App.lastResult !== code) {
             App.lastResult = code;
 
-            var isbn = document.getElementById("isbn");
-            isbn.value += code + "\n";
+            var isbn = document.getElementById("readings");
+            isbn.innerHTML += "<li>" + code + "</li>";
 
 
             // var $node = null, canvas = Quagga.canvas.dom.image;
