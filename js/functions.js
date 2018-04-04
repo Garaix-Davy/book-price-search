@@ -103,7 +103,7 @@ function start() {
                 }
             },
             locator: {
-                patchSize: "medium",
+                patchSize: "small",
                 halfSample: true
             },
             numOfWorkers: 2,
@@ -153,6 +153,7 @@ function start() {
 
             var isbn = document.getElementById("isbn");
             isbn.innerHTML += code + "\n";
+
 
             var $node = null, canvas = Quagga.canvas.dom.image;
 
