@@ -150,6 +150,10 @@ function start() {
 
         if (App.lastResult !== code) {
             App.lastResult = code;
+
+            var isbn = document.getElementById("isbn");
+            isbn.innerHTML += code + "\n";
+
             var $node = null, canvas = Quagga.canvas.dom.image;
 
             $node = $('<li><div class="thumbnail"><div class="imgWrapper"><img /></div><div class="caption"><h4 class="code"></h4></div></div></li>');
