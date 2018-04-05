@@ -11,6 +11,7 @@
   font-size: 2vh;
   color: white;
   background: tan;
+  border-radius: 1vh;
 }
 
 h1,p {
@@ -18,7 +19,6 @@ h1,p {
 }
 
 .drawingBuffer {
-  border: 2px green solid;
   height: 0vh;
   width: 0vh;
   visibility: hidden;
@@ -37,7 +37,7 @@ video {
   width: 100%;
   overflow: hidden;
   height: 20vh;
-  text-align:center;
+  text-align: center;
 }
 
 #isbn {
@@ -50,9 +50,10 @@ input {
 }
 
 button {
-  background-color: brown; /* Green */
+  background-color: white;
   border: none;
-  color: white;
+  color: brown;
+  border: 2px brown solid;
   padding: 1vh 4vh;
   margin: 0.5vh;
   text-align: center;
@@ -61,6 +62,17 @@ button {
   font-size: 3vh;
   border-radius: 1vh;
   cursor: pointer;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+}
+
+button:hover {
+  background-color: brown;
+  color: white;
+}
+
+button:focus {
+  outline:0;
 }
 
 @media only screen and (max-width: 768px) {
