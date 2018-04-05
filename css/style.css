@@ -3,10 +3,18 @@
   justify-content: center;
 }
 
-.viewport {
-
-}
-
 .drawingBuffer {
   position: absolute;
+}
+
+video {
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+}
+
+#interactive.viewport canvas, video {
+  float: left;
+  width: 320px;
+  height: 300px;
 }
