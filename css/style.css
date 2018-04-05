@@ -25,8 +25,7 @@ h1,p {
 }
 
 video {
-  border: 2px blue solid;
-  height: 20vh;
+  height: 40vh;
 }
 
 /* #interactive.viewport canvas, video {
@@ -37,18 +36,17 @@ video {
 #scanner {
   width: 100%;
   overflow: hidden;
-  height: 10vh;
+  height: 20vh;
   text-align:center;
 }
 
-#number {
-  font-size: 3vh;
-  text-align: center;
+#isbn {
+  margin: 0.5vh;
 }
 
-
-div {
-  border: 1px black solid;
+input {
+  font-size: 3vh;
+  text-align: center;
 }
 
 button {
