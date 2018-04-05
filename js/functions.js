@@ -1,5 +1,18 @@
 var debugDiv = document.getElementById("debug");
 
+function scan(){
+  var scanButton = document.getElementById("scan");
+  if (scanButton.getAttribute("clicked") === "false"){
+    console.log("here");
+    scanButton.setAttribute("clicked","true");
+    scanButton.innerHTML = "Stop Scanner";
+    start();
+  } else {
+    Quagga.stop();
+    scanButton.setAttribute("clicked","false");
+    scanButton.innerHTML = "Scan Barcode";
+  }
+}
 
 function start() {
     var App = {
@@ -58,31 +71,31 @@ function start() {
                 return;
             }
         },
-        initCameraSelection: function(){
-            var streamLabel = Quagga.CameraAccess.getActiveStreamLabel();
-
-            return Quagga.CameraAccess.enumerateVideoDevices()
-            .then(function(devices) {
-                function pruneText(text) {
-                    return text.length > 30 ? text.substr(0, 30) : text;
-                }
-                var $deviceSelection = document.getElementById("deviceSelection");
-                while ($deviceSelection.firstChild) {
-                    $deviceSelection.removeChild($deviceSelection.firstChild);
-                }
-                devices.forEach(function(device) {
-                    var $option = document.createElement("option");
-                    $option.value = device.deviceId || device.id;
-                    $option.appendChild(document.createTextNode(pruneText(device.label || device.deviceId || device.id)));
-                    $option.selected = streamLabel === device.label;
-                    $deviceSelection.appendChild($option);
-                });
-            });
-        },
+        // initCameraSelection: function(){
+        //     var streamLabel = Quagga.CameraAccess.getActiveStreamLabel();
+        //
+        //     return Quagga.CameraAccess.enumerateVideoDevices()
+        //     .then(function(devices) {
+        //         function pruneText(text) {
+        //             return text.length > 30 ? text.substr(0, 30) : text;
+        //         }
+        //         var $deviceSelection = document.getElementById("deviceSelection");
+        //         while ($deviceSelection.firstChild) {
+        //             $deviceSelection.removeChild($deviceSelection.firstChild);
+        //         }
+        //         devices.forEach(function(device) {
+        //             var $option = document.createElement("option");
+        //             $option.value = device.deviceId || device.id;
+        //             $option.appendChild(document.createTextNode(pruneText(device.label || device.deviceId || device.id)));
+        //             $option.selected = streamLabel === device.label;
+        //             $deviceSelection.appendChild($option);
+        //         });
+        //     });
+        // },
         attachListeners: function() {
             var self = this;
 
-            self.initCameraSelection();
+            // self.initCameraSelection();
             $(".controls").on("click", "button.stop", function(e) {
                 e.preventDefault();
                 Quagga.stop();
@@ -97,7 +110,7 @@ function start() {
                 type : "LiveStream",
                 constraints: {
                     width: {min: 640},
-                    height: {min: 480},
+                    height: {min: 360},
                     aspectRatio: {min: 1, max: 100},
                     facingMode: "environment" // or user
                 }

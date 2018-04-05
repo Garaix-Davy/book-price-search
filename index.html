@@ -3,33 +3,34 @@
 <head>
 	<meta charset="utf-8">
 	<title>Book Price Search</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" type="text/css" href="./css/style.css">
 </head>
 
 <body>
-  <div id="debug"></div>
-  <section id="container" class="container">
-      <h1>Book Price Search</h1>
-			<p>Scan a book's barcode and get pricing information from eBay.</p>
-      <p>Active the barcode scanner, or type the ISBN in the field below.</p>
-      <div class="controls">
-          <fieldset class="input-group">
-							<button class="start" onclick="start()">Start</button>
-              <button class="stop">Stop</button>
-          </fieldset>
-      </div>
-			<div class="flex-container">
-      	<div id="interactive" class="viewport"></div>
-			</div>
-			<div class="flex-container">
-				<ul id="isbn"></ul>
-			</div>
 
-			<div id="result_strip">
-					<ul class="thumbnails"></ul>
-			</div>
-  </section>
+<div class="flex-container">
+
+	<div id="topbar">
+    <h1>Book Price Search</h1>
+		<p>Scan the barcode of a book and get listing information from eBay.</p>
+		<hr>
+	</div>
+
+	<div id="buttons">
+		<button id="scan" onclick="scan()" clicked="false">Scan Barcode</button>
+	</div>
+
+  <div id="scanner">
+      	<div id="interactive" class="viewport"></div>
+				<ul id="isbn">as</ul>
+  </div>
+
+	<div id="results">
+
+	</div>
+
+</div>
 
   <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
   <script src="js/adapter-latest.js" type="text/javascript"></script>
