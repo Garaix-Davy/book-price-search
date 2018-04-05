@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>Book Price Search</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" type="text/css" href="./css/style.css">
 </head>
 
@@ -14,7 +14,6 @@
 	<div id="topbar">
     <h1>Book Price Search</h1>
 		<p>Scan the barcode of a book and get listing information from eBay.</p>
-		<hr>
 	</div>
 
 	<div id="buttons">
@@ -23,8 +22,12 @@
 
   <div id="scanner">
       	<div id="interactive" class="viewport"></div>
-				<ul id="isbn">as</ul>
+			 	<canvas class="drawingBuffer"></canvas>
   </div>
+
+	<div id="isbn">
+		<input id="number" value=""/>
+	</div>
 
 	<div id="results">
 

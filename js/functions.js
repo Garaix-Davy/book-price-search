@@ -110,8 +110,7 @@ function start() {
                 type : "LiveStream",
                 constraints: {
                     width: {min: 640},
-                    height: {min: 360},
-                    aspectRatio: {min: 1, max: 100},
+                    height: {min: 360},  
                     facingMode: "environment" // or user
                 }
             },
@@ -164,8 +163,8 @@ function start() {
         if (App.lastResult !== code) {
             App.lastResult = code;
 
-            var isbn = document.getElementById("isbn");
-            isbn.innerHTML += "<li>" + code + "</li>";
+            var isbn = document.getElementById("number");
+            isbn.value = code;
 
 
             // var $node = null, canvas = Quagga.canvas.dom.image;
