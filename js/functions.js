@@ -109,8 +109,8 @@ function start() {
             inputStream: {
                 type : "LiveStream",
                 constraints: {
-                    width: 400,
-                    height: 200,
+                    width: {min: 640},
+                    height: {min: 480},
                     facingMode: "environment" // or user
                 }
             },

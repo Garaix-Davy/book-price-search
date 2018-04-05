@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 98vh;
+  min-height: 90vh;
 }
 
 #topbar {
@@ -26,15 +26,19 @@ h1,p {
 
 video {
   border: 2px blue solid;
+  height: 20vh;
 }
 
-#interactive.viewport canvas, video {
-  /* width: 64vh;
-  height: 36vh; */
-}
+/* #interactive.viewport canvas, video {
+  width: 64vh;
+  height: 36vh;
+} */
 
 #scanner {
   width: 100%;
+  overflow: hidden;
+  height: 10vh;
+  text-align:center;
 }
 
 #number {
@@ -42,9 +46,6 @@ video {
   text-align: center;
 }
 
-#interactive {
-  border: 2px red solid;
-}
 
 div {
   border: 1px black solid;
