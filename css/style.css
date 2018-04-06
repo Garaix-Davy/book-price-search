@@ -75,6 +75,31 @@ button:focus {
   outline:0;
 }
 
+#results {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    text-align: center;
+    font-size: 2vh;
+}
+
+#results td, #results th {
+    border: 1px solid white;
+    padding: 4px;
+}
+
+#results tr:nth-child(even){background-color: #FED9AF;}
+
+#results tr:hover {background-color: #DDA769;}
+
+#results th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: tan;
+    color: white;
+}
+
 @media only screen and (max-width: 768px) {
     /* For mobile phones: */
 
