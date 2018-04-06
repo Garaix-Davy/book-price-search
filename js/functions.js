@@ -19,7 +19,7 @@ function searchEbay(isbnValue){
   try {
     results.innerHTML = "";
     var appID = "DavyGara-bookpric-PRD-a78731904-738f601d";
-    var url = 'http://svcs.ebay.com/services/search/FindingService/v1'
+    var url = 'https://svcs.ebay.com/services/search/FindingService/v1'
                       +'?OPERATION-NAME=findCompletedItems'
                       +'&SECURITY-APPNAME=' + appID
                       +'&GLOBAL-ID=EBAY-US'
