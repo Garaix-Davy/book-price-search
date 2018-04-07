@@ -11,15 +11,69 @@ function toggleScanner(){
     Quagga.stop();
     scanButton.setAttribute("clicked","false");
     scanButton.innerHTML = "Scan Barcode";
-    // searchEbay("9781595550781"); // for testing - remove this.
+    //searchEbay("9781595550781"); // for testing - remove this.
   }
 }
 
-function searchEbay(isbnValue){
-  try {
+// function searchEbay(isbnValue){
+//
+//     results.innerHTML = "";
+//     var appID = "DavyGara-bookpric-PRD-a78731904-738f601d";
+//     var url = 'https://svcs.ebay.com/services/search/FindingService/v1'
+//                       +'?OPERATION-NAME=findCompletedItems'
+//                       +'&SECURITY-APPNAME=' + appID
+//                       +'&GLOBAL-ID=EBAY-US'
+//                       +'&RESPONSE-DATA-FORMAT=JSON'
+//                       +'&REST-PAYLOAD'
+//                       +'&keywords=' + isbnValue
+//                       +'&categoryId=267'
+//                       +'&itemFilter(0).name=SoldItemsOnly'
+//                       +'&itemFilter(0).value=true'
+//                       +'&sortOrder=EndTimeSoonest'
+//                       +'&paginationInput.entriesPerPage=10';
+//
+//     var xhr = new XMLHttpRequest();
+//     xhr.open('GET', url );
+//     xhr.setRequestHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+//     xhr.setRequestHeader('Content-Type', 'application/json');
+//     xhr.setRequestHeader('Access-Control-Allow-Credentials', 'true');
+//     xhr.send();
+//     xhr.onreadystatechange = function() {
+//       if (xhr.readyState === 4 && xhr.status === 200) {
+//         var resp = JSON.parse(xhr.responseText);
+//         var books = resp.findCompletedItemsResponse[0].searchResult[0].item || [];
+//         var html = [];
+//         if (books.length > 0){
+//           html.push('<table id="bookTable">');
+//           html.push('<tr><th>Book Title ('+isbnValue+')</th><th>Condition</th><th>Sold Price (shipping included)</th><th>Date Sold</th></tr>');
+//           for (i = 0; i < books.length; i++) {
+//               var bookTitle = books[i].title;
+//               var bookCondition = books[i].condition[0].conditionDisplayName;
+//               var bookShippingCost = 0;
+//               if (books[i].hasOwnProperty('shippingInfo') && books[i].shippingInfo[0].hasOwnProperty('shippingServiceCost')){
+//                 bookShippingCost = parseFloat(books[i].shippingInfo[0].shippingServiceCost[0].__value__);
+//               }
+//               var bookSoldPrice = parseFloat(books[i].sellingStatus[0].currentPrice[0].__value__) + bookShippingCost;
+//               var dateSold = books[i].listingInfo[0].endTime.toString().substring(0,10);
+//               html.push('<tr><td>'+bookTitle+'</td><td>'+bookCondition+'</td><td>'+'$'+bookSoldPrice.toFixed(2)+'</td><td>'+dateSold+'</td></tr>');
+//           }
+//           html.push('</table>');
+//           results.innerHTML = html.join("");
+//         } else {
+//           results.innerHTML = "Sorry, this book didn't sell on eBay (US) recently. Please scan another.";
+//         }
+//       } else {
+//         results.innerHTML = "Error: " + xhr.status + "<br>";
+//       }
+//     }
+// }
+
+function searchEbay(isbnValue) {
     results.innerHTML = "";
     var appID = "DavyGara-bookpric-PRD-a78731904-738f601d";
-    var url = 'https://svcs.ebay.com/services/search/FindingService/v1'
+    // added free CORS proxy to make this work.
+    var url = 'https://crossorigin.me/'
+                      +'http://svcs.ebay.com/services/search/FindingService/v1'
                       +'?OPERATION-NAME=findCompletedItems'
                       +'&SECURITY-APPNAME=' + appID
                       +'&GLOBAL-ID=EBAY-US'
@@ -32,41 +86,59 @@ function searchEbay(isbnValue){
                       +'&sortOrder=EndTimeSoonest'
                       +'&paginationInput.entriesPerPage=10';
 
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', url );
-    xhr.send();
-    xhr.onreadystatechange = function() {
-      if (xhr.readyState === 4 && xhr.status === 200) {
-        var resp = JSON.parse(xhr.responseText);
-        var books = resp.findCompletedItemsResponse[0].searchResult[0].item || [];
-        var html = [];
-        if (books.length > 0){
-          html.push('<table id="bookTable">');
-          html.push('<tr><th>Book Title ('+isbnValue+')</th><th>Condition</th><th>Sold Price (shipping included)</th><th>Date Sold</th></tr>');
-          for (i = 0; i < books.length; i++) {
-              var bookTitle = books[i].title;
-              var bookCondition = books[i].condition[0].conditionDisplayName;
-              var bookShippingCost = 0;
-              if (books[i].hasOwnProperty('shippingInfo') && books[i].shippingInfo[0].hasOwnProperty('shippingServiceCost')){
-                bookShippingCost = parseFloat(books[i].shippingInfo[0].shippingServiceCost[0].__value__);
-              }
-              var bookSoldPrice = parseFloat(books[i].sellingStatus[0].currentPrice[0].__value__) + bookShippingCost;
-              var dateSold = books[i].listingInfo[0].endTime.toString().substring(0,10);
-              html.push('<tr><td>'+bookTitle+'</td><td>'+bookCondition+'</td><td>'+'$'+bookSoldPrice.toFixed(2)+'</td><td>'+dateSold+'</td></tr>');
-          }
-          html.push('</table>');
-          results.innerHTML = html.join("");
-        } else {
-          results.innerHTML = "Sorry, this book didn't sell on eBay (US) recently. Please scan another.";
-        }
-      } else {
-        results.innerHTML = "Error: " + xhr.status + "<br>";
-      }
-    }
-  } // end try
-  catch(err) {
-      results.innerHTML = "Error message: " + err.message;
+  var xhr = createCORSRequest('GET', url);
+  if (!xhr) {
+    alert('CORS not supported');
+    return;
   }
+
+  // Response handlers.
+  xhr.onload = function() {
+    var resp = JSON.parse(xhr.responseText);
+    var books = resp.findCompletedItemsResponse[0].searchResult[0].item || [];
+    var html = [];
+    if (books.length > 0){
+      html.push('<table id="bookTable">');
+      html.push('<tr><th>Book Title ('+isbnValue+')</th><th>Condition</th><th>Sold Price (shipping included)</th><th>Date Sold</th></tr>');
+      for (i = 0; i < books.length; i++) {
+          var bookTitle = books[i].title;
+          var bookCondition = books[i].condition[0].conditionDisplayName;
+          var bookShippingCost = 0;
+          if (books[i].hasOwnProperty('shippingInfo') && books[i].shippingInfo[0].hasOwnProperty('shippingServiceCost')){
+            bookShippingCost = parseFloat(books[i].shippingInfo[0].shippingServiceCost[0].__value__);
+          }
+          var bookSoldPrice = parseFloat(books[i].sellingStatus[0].currentPrice[0].__value__) + bookShippingCost;
+          var dateSold = books[i].listingInfo[0].endTime.toString().substring(0,10);
+          html.push('<tr><td>'+bookTitle+'</td><td>'+bookCondition+'</td><td>'+'$'+bookSoldPrice.toFixed(2)+'</td><td>'+dateSold+'</td></tr>');
+      }
+      html.push('</table>');
+      results.innerHTML = html.join("");
+    } else {
+      results.innerHTML = "Sorry, this book didn't sell on eBay (US) recently. Please scan another.";
+    }
+  };
+
+  xhr.onerror = function() {
+    alert('Woops, there was an error making the request.');
+  };
+
+  xhr.send();
+}
+
+function createCORSRequest(method, url) {
+  var xhr = new XMLHttpRequest();
+  if ("withCredentials" in xhr) {
+    // XHR for Chrome/Firefox/Opera/Safari.
+    xhr.open(method, url, true);
+  } else if (typeof XDomainRequest != "undefined") {
+    // XDomainRequest for IE.
+    xhr = new XDomainRequest();
+    xhr.open(method, url);
+  } else {
+    // CORS not supported.
+    xhr = null;
+  }
+  return xhr;
 }
 
 // The function below is a modified version of the barcode API for this app.
