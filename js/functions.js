@@ -1,5 +1,5 @@
 var debugDiv = document.getElementById("debug");
-var results = document.getElementById("results");
+var resultsBody = document.getElementById("resultsBody");
 
 function toggleScanner(){
   var scanButton = document.getElementById("scan");
@@ -69,7 +69,7 @@ function toggleScanner(){
 // }
 
 function searchEbay(isbnValue) {
-    results.innerHTML = "";
+    resultsBody.innerHTML = "";
     var appID = "DavyGara-bookpric-PRD-a78731904-738f601d";
     // added free CORS proxy to make this work.
     var url = 'https://crossorigin.me/'
@@ -99,7 +99,7 @@ function searchEbay(isbnValue) {
     var html = [];
     if (books.length > 0){
       html.push('<table id="bookTable">');
-      html.push('<tr><th>Book Title ('+isbnValue+')</th><th>Condition</th><th>Sold Price (shipping included)</th><th>Date Sold</th></tr>');
+      html.push('<tr><th>ISBN: '+isbnValue+'</th><th>Condition</th><th>Sold Price*</th><th>Date Sold</th></tr>');
       for (i = 0; i < books.length; i++) {
           var bookTitle = books[i].title;
           var bookCondition = books[i].condition[0].conditionDisplayName;
@@ -112,10 +112,11 @@ function searchEbay(isbnValue) {
           html.push('<tr><td>'+bookTitle+'</td><td>'+bookCondition+'</td><td>'+'$'+bookSoldPrice.toFixed(2)+'</td><td>'+dateSold+'</td></tr>');
       }
       html.push('</table>');
-      results.innerHTML = html.join("");
+      resultsBody.innerHTML = html.join("");
     } else {
-      results.innerHTML = "Sorry, this book didn't sell on eBay (US) recently. Please scan another.";
+      resultsBody.innerHTML = "<p>Sorry, this book didn't sell on eBay (US) recently. Please scan another.</p>";
     }
+    toggleResults();
   };
 
   xhr.onerror = function() {
@@ -265,15 +266,51 @@ function start() {
 
     Quagga.onDetected(function(result) {
         var code = result.codeResult.code;
+        toggleScanner();
+        var isbn = document.getElementById("number");
+        isbn.value = code;
+        searchEbay(isbn.value);
 
-        if (App.lastResult !== code) {
-            App.lastResult = code;
-            var isbn = document.getElementById("number");
-            isbn.value = code;
-
-            toggleScanner();
-            searchEbay(isbn.value);
-
-        }
+        // if (App.lastResult !== code) {
+        //     App.lastResult = code;
+        //     var isbn = document.getElementById("number");
+        //     isbn.value = code;
+        //
+        //     toggleScanner();
+        //     searchEbay(isbn.value);
+        //
+        // }
     });
+}
+
+// displays the About modal box
+
+
+function toggleAbout(){
+  if (document.getElementById('about').style.display=='block'){
+    document.getElementById('about').style.display='none';
+  } else {
+    document.getElementById('about').style.display='block';
+  }
+}
+
+function toggleResults(){
+  if (document.getElementById('results').style.display=='block'){
+    document.getElementById('results').style.display='none';
+  } else {
+    document.getElementById('results').style.display='block';
+  }
+}
+
+function toggleHistory(){
+  if (document.getElementById('history').style.display=='block'){
+    document.getElementById('history').style.display='none';
+  } else {
+    document.getElementById('history').style.display='block';
+  }
+}
+
+function manualSearch(){
+  var isbn = document.getElementById("number");
+  searchEbay(isbn.value);
 }

@@ -1,3 +1,20 @@
+body {
+  margin: 0;
+}
+h1, p {
+  padding: 8px;
+}
+
+ul {
+  margin-bottom: 0px;
+}
+
+h2 {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  color: #9C6902;
+}
+
 .flex-container {
   display: flex;
   flex-direction: column;
@@ -8,13 +25,47 @@
 #topbar {
   text-align: center;
   width: 100%;
-  font-size: 2vh;
+  font-size: 5vh;
   color: white;
-  background: tan;
-  border-radius: 1vh;
+  background: #9C6902;
 }
 
-h1,p {
+.topnav div.active {
+    background-color: #FBA90A;
+}
+
+.topnav div:hover {
+    background-color: #FBA90A;
+    color: #9C6902;
+}
+
+.topnav {
+    display: flex;
+    justify-content: space-around;
+    background-color: #FDCD6D;
+    color: #B69B02;
+    overflow: hidden;
+    width: 100%;
+}
+
+.topnav div {
+    float: left;
+    color: white;
+    text-align: center;
+    padding: 0.5vh;
+    text-decoration: none;
+    font-size: 3vh;
+    width: 100%;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.topnav div:after {
+  transition: all 0.8s
+}
+
+h1, p {
   margin: 0;
 }
 
@@ -36,17 +87,33 @@ video {
 #scanner {
   width: 100%;
   overflow: hidden;
-  height: 20vh;
+  height: 40vh;
   text-align: center;
 }
 
 #isbn {
   margin: 0.5vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 input {
   font-size: 3vh;
   text-align: center;
+  border: 2px #FDCD6D solid;
+  border-radius: 1vh;
+
+}
+
+input:focus {
+  outline:0;
+}
+
+#isbn button{
+  text-align: center;
+  width: 50%;
 }
 
 button {
@@ -80,7 +147,7 @@ button:focus {
     border-collapse: collapse;
     width: 100%;
     text-align: center;
-    font-size: 2vh;
+    font-size: 1.5vh;
 }
 
 #results td, #results th {
@@ -93,11 +160,111 @@ button:focus {
 #results tr:hover {background-color: #DDA769;}
 
 #results th {
-    padding-top: 12px;
-    padding-bottom: 12px;
+    padding-top: 6px;
+    padding-bottom: 6px;
     text-align: left;
     background-color: tan;
     color: white;
+}
+
+/* Modals */
+.modal {
+  z-index: 3;
+  display: none;
+  padding-top: 10%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4)
+}
+
+.modal-content {
+  margin: auto;
+  background-color: #fff;
+  position: relative;
+  outline: 0;
+  width: 90%;
+  font-size: 1.5vh;
+}
+
+.animate-top {
+  position: relative;
+  animation: animatetop 0.4s
+}
+
+.animate-bottom {
+  position: relative;
+  animation: animatebottom 0.4s
+}
+
+.card {
+  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19)
+}
+
+.modal-container {
+  padding: 0.01em 16px
+}
+
+.modal-container:after, .w3-container:before {
+  content: "";
+  display: table;
+  clear: both
+}
+
+.sand, .sand:hover {
+  color: white;
+  background-color: #FDCD6D;
+}
+
+.modal-button {
+  border: none;
+  display: inline-block;
+  padding: 8px 16px;
+  vertical-align: middle;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  background-color: inherit;
+  text-align: center;
+  cursor: pointer;
+  white-space: nowrap
+}
+
+.modal-button:hover {
+  background-color: #FBA90A;
+  color: #9C6902;
+}
+
+.modal-display-topright {
+  position: absolute;
+  right: 0;
+  top: 0
+}
+
+@keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0
+  }
+  to {
+    top: 0;
+    opacity: 1
+  }
+}
+
+@keyframes animatebottom {
+  from {
+    bottom: -300px;
+    opacity: 0
+  }
+  to {
+    bottom: 0;
+    opacity: 1
+  }
 }
 
 @media only screen and (max-width: 768px) {

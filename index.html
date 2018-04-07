@@ -5,6 +5,7 @@
 	<title>Book Price Search</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" type="text/css" href="./css/style.css">
+<!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
 </head>
 
 <body>
@@ -12,9 +13,57 @@
 <div class="flex-container">
 
 	<div id="topbar">
-    <h1>Book Price Search</h1>
-		<p>Scan the barcode of a book and get listing information from eBay.</p>
+    Book Price Search
 	</div>
+
+	<div class="topnav">
+		<div class="active">Scan</div>
+		<div onclick="toggleHistory()">History</div>
+		<div onclick="toggleAbout()">About</div>
+	</div>
+
+	<!-- This is the content for the About section -->
+	<div id="about" class="modal">
+    <div class="modal-content animate-top card">
+      <header class="modal-container sand">
+        <span onclick="toggleAbout()"
+        class="modal-button modal-display-topright">&times;</span>
+        <h1>About this app</h1>
+      </header>
+      <div class="modal-container">
+				<h2>Compatibility</h2>
+				<p>This app is meant to work in Chrome on Desktop.
+					However, it should be somewhat responsive on mobile devices.
+					The barcode scanner has been tested on a LG Leon and Zenphone 2 smartphone using Chrome as the browser
+					The barcode scanner may have difficulties scanning small barcodes at this time.
+					This app uses a CORS proxy (https://crossorigin.me/), and so it may take a second or two for the results to appear. The scan results are dependent on the proxy.
+				</p>
+				<h2>How to use</h2>
+        <p>This app is intended to quickly find the current value of books on eBay. Here are some basic steps:
+				<ul>
+					<li>Grab a book with a medium-size ISBN barcode on the back. The barcode is sometimes composed of two sections. The wider section (usually on the left) is the one we're interested in.</li>
+					<li>Click the Scan Barcode button. You device/browser may ask to allow access to your camera. Click Allow.</li>
+					<li>Position the ISBN barcode in the scanner view close enough to get a clear read. The orientation does not matter.</li>
+					<li>The scanned isbn number will appear below the scanner view and in the search results.</li>
+					<li>Wait a few seconds for the results to appear.</li>
+					<li>Close the results, they will be saved to the History section.</li>
+					<li>Click the Scan Barcode button to scan another book.</li>
+				</ul>
+				<p>You also can manually enter an ISBN number and click the search button instead.</p>
+				<p>Only the last 10 results will be shown. This should be sufficient to determine the demand of that book.</p>
+				<p>If you can't get a barcode to scan, try with another book, or with another phone/computer with a better camera.</p>
+				<p>* The Sold Price column includes shipping costs if there were any.</p>
+				<h2>Previous searches</h2>
+				<p>
+					This section is meant to keep track of your past scans and results.
+				</p>
+      </div>
+      <footer class="modal-container sand">
+        <p>Book Price Search app
+					<br>https://garaix-davy.github.io/book-price-search/</p>
+      </footer>
+    </div>
+  </div>
 
 	<div id="buttons">
 		<button id="scan" onclick="toggleScanner()" clicked="false">Scan Barcode</button>
@@ -25,11 +74,42 @@
   </div>
 
 	<div id="isbn">
-		<input id="number" value=""/>
+		<input id="number" value="ISBN"/>
+		<button id="manualSearch" onclick="manualSearch()">Search</button>
 	</div>
 
-	<div id="results">
+	<div id="results" class="modal">
+    <div class="modal-content animate-bottom card">
+      <header class="modal-container sand">
+        <span onclick="toggleResults()"
+        class="modal-button modal-display-topright">&times;</span>
+        <h1>Scan Results</h1>
+      </header>
+      <div class="modal-container" id="resultsBody">
 
+      </div>
+      <footer class="modal-container sand">
+        <p>Book Price Search app
+					<br>https://garaix-davy.github.io/book-price-search/</p>
+      </footer>
+    </div>
+  </div>
+
+	<div id="history" class="modal">
+		<div class="modal-content animate-top card">
+			<header class="modal-container sand">
+				<span onclick="toggleHistory()"
+				class="modal-button modal-display-topright">&times;</span>
+				<h1>Search History</h1>
+			</header>
+			<div class="modal-container" id="HistoryBody">
+				
+			</div>
+			<footer class="modal-container sand">
+				<p>Book Price Search app
+					<br>https://garaix-davy.github.io/book-price-search/</p>
+			</footer>
+		</div>
 	</div>
 
 	<div id="debug"></div>
