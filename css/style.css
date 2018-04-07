@@ -172,7 +172,6 @@ button:focus {
 .modal {
   z-index: 3;
   display: none;
-  padding-top: 10%;
   position: fixed;
   left: 0;
   top: 0;
@@ -232,7 +231,8 @@ button:focus {
   background-color: inherit;
   text-align: center;
   cursor: pointer;
-  white-space: nowrap
+  white-space: nowrap;
+  font-size: 200%;
 }
 
 .modal-button:hover {
@@ -275,14 +275,14 @@ input[type='checkbox'] {
 
 .wrap-collabsible {
   margin: 2px;
+
 }
 
 .lbl-toggle {
   display: block;
-
   font-weight: bold;
   font-family: monospace;
-  font-size: 1.2rem;
+  font-size: 1rem;
   text-transform: uppercase;
   text-align: center;
 

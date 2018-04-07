@@ -332,7 +332,7 @@ function formHistory(){
                     +'<input id="'+localStorage.key(i)+'" class="toggle" type="checkbox">'
                     +'<label for="'+localStorage.key(i)+'" class="lbl-toggle">'
                     +localStorage.key(i) //isbn from localStorage
-                    + " - " + dateStamp()
+                    + ' (' + dateStamp() + ')'
                     +'</label><div class="collapsible-content">'
                     +'<div class="content-inner">'
                     +'<p>'
