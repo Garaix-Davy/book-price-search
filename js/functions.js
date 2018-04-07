@@ -73,6 +73,7 @@ function toggleScanner(){
 // }
 
 function searchEbay(isbnValue) {
+    Quagga.stop();
     resultsBody.innerHTML = "";
     var appID = "DavyGara-bookpric-PRD-a78731904-738f601d";
     // added free CORS proxy to make this work.
