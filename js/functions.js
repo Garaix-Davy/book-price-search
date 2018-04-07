@@ -12,7 +12,7 @@ function toggleScanner(){
     scanButton.setAttribute("clicked","true");
     scanButton.innerHTML = "Stop Scanner";
     start();
-  } elseif (scanButton.getAttribute("clicked") === "true") {
+  } else if (scanButton.getAttribute("clicked") === "true") {
     scanButton.setAttribute("clicked","false");
     scanButton.innerHTML = "Scan Barcode";
     Quagga.stop();
