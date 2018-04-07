@@ -273,6 +273,7 @@ function start() {
 
     Quagga.onDetected(function(result) {
         var code = result.codeResult.code;
+        Quagga.stop();
         toggleScanner();
         var isbn = document.getElementById("number");
         isbn.value = code;

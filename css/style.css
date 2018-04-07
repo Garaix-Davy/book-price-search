@@ -275,7 +275,6 @@ input[type='checkbox'] {
 
 .wrap-collabsible {
   margin: 2px;
-
 }
 
 .lbl-toggle {
@@ -333,7 +332,7 @@ input[type='checkbox'] {
 }
 
 .toggle:checked + .lbl-toggle + .collapsible-content {
-  max-height: 40vh;
+  max-height: 60vh;
 }
 .toggle:checked + .lbl-toggle::before {
   transform: rotate(90deg) translateX(-3px);
