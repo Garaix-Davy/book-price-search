@@ -7,6 +7,7 @@ h1, p {
 
 ul {
   margin-bottom: 0px;
+  margin-top: 0px;
 }
 
 h2 {
@@ -142,7 +143,7 @@ button:focus {
   outline:0;
 }
 
-#results {
+#results, #history {
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 100%;
@@ -150,16 +151,16 @@ button:focus {
     font-size: 1.5vh;
 }
 
-#results td, #results th {
+#results td, #results th, #history td, #history th {
     border: 1px solid white;
     padding: 4px;
 }
 
-#results tr:nth-child(even){background-color: #FED9AF;}
+#results tr:nth-child(even), #history tr:nth-child(even){background-color: #FED9AF;}
 
-#results tr:hover {background-color: #DDA769;}
+#results tr:hover, #history tr:hover{background-color: #DDA769;}
 
-#results th {
+#results th, #history th {
     padding-top: 6px;
     padding-bottom: 6px;
     text-align: left;
@@ -267,11 +268,78 @@ button:focus {
   }
 }
 
-@media only screen and (max-width: 768px) {
-    /* For mobile phones: */
+/* history styling */
+input[type='checkbox'] {
+  display: none;
+}
 
-    .flex-container, #topbar {
+.wrap-collabsible {
+  margin: 2px;
+}
 
-    }
+.lbl-toggle {
+  display: block;
 
+  font-weight: bold;
+  font-family: monospace;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  text-align: center;
+
+  color: white;
+  background: brown;
+
+  cursor: pointer;
+
+  border-radius: 7px;
+  transition: all 0.25s ease-out;
+}
+
+.lbl-toggle:hover {
+  background-color: #FBA90A;
+  color: #9C6902;
+}
+
+.lbl-toggle::before {
+  content: ' ';
+  display: inline-block;
+
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 5px solid currentColor;
+
+  vertical-align: middle;
+  margin-right: .7rem;
+  transform: translateY(-2px);
+
+  transition: transform .2s ease-out;
+}
+
+.collapsible-content .content-inner {
+  background: rgba(250, 224, 66, .2);
+  border-bottom: 1px solid rgba(250, 224, 66, .45);
+
+  border-bottom-left-radius: 7px;
+  border-bottom-right-radius: 7px;
+  padding: .5rem 1rem;
+}
+
+.collapsible-content {
+  max-height: 0px;
+  overflow: hidden;
+  overflow-y: scroll;
+
+  transition: max-height .25s ease-in-out;
+}
+
+.toggle:checked + .lbl-toggle + .collapsible-content {
+  max-height: 40vh;
+}
+.toggle:checked + .lbl-toggle::before {
+  transform: rotate(90deg) translateX(-3px);
+}
+
+.toggle:checked + .lbl-toggle {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
 }

@@ -56,6 +56,7 @@
 				<h2>Previous searches</h2>
 				<p>
 					This section is meant to keep track of your past scans and results.
+					Simply select the ISBN number to see the results.
 				</p>
       </div>
       <footer class="modal-container sand">
@@ -74,7 +75,7 @@
   </div>
 
 	<div id="isbn">
-		<input id="number" value="ISBN"/>
+		<input id="number" onfocus="this.value=''"value="ISBN"/>
 		<button id="manualSearch" onclick="manualSearch()">Search</button>
 	</div>
 
@@ -102,8 +103,8 @@
 				class="modal-button modal-display-topright">&times;</span>
 				<h1>Search History</h1>
 			</header>
-			<div class="modal-container" id="HistoryBody">
-				
+			<div class="modal-container" id="historyBody">
+
 			</div>
 			<footer class="modal-container sand">
 				<p>Book Price Search app
@@ -112,7 +113,7 @@
 		</div>
 	</div>
 
-	<div id="debug"></div>
+<div id="debug"></div>
 
 </div>
 

@@ -1,5 +1,9 @@
 var debugDiv = document.getElementById("debug");
 var resultsBody = document.getElementById("resultsBody");
+var historyBody = document.getElementById('historyBody');
+
+
+
 
 function toggleScanner(){
   var scanButton = document.getElementById("scan");
@@ -112,10 +116,13 @@ function searchEbay(isbnValue) {
           html.push('<tr><td>'+bookTitle+'</td><td>'+bookCondition+'</td><td>'+'$'+bookSoldPrice.toFixed(2)+'</td><td>'+dateSold+'</td></tr>');
       }
       html.push('</table>');
-      resultsBody.innerHTML = html.join("");
     } else {
-      resultsBody.innerHTML = "<p>Sorry, this book didn't sell on eBay (US) recently. Please scan another.</p>";
+      html.push("<p>Sorry, this book didn't sell on eBay (US) recently. Please scan another.</p>");
     }
+
+    resultsBody.innerHTML = html.join("");
+    // saves to local storage
+    localStorage.setItem(isbnValue,html.join(""));
     toggleResults();
   };
 
@@ -308,9 +315,36 @@ function toggleHistory(){
   } else {
     document.getElementById('history').style.display='block';
   }
+  historyBody.innerHTML = formHistory();
 }
 
 function manualSearch(){
   var isbn = document.getElementById("number");
   searchEbay(isbn.value);
+}
+
+function formHistory(){
+  historyContent = "";
+
+  for (var i = 0; i < localStorage.length; i++){
+
+    historyContent +='<div class="wrap-collabsible">'
+                    +'<input id="'+localStorage.key(i)+'" class="toggle" type="checkbox">'
+                    +'<label for="'+localStorage.key(i)+'" class="lbl-toggle">'
+                    +localStorage.key(i) //isbn from localStorage
+                    + " - " + dateStamp()
+                    +'</label><div class="collapsible-content">'
+                    +'<div class="content-inner">'
+                    +'<p>'
+                    +localStorage.getItem(localStorage.key(i)) //table from localStorage
+                    +'</p></div></div></div>';
+    }
+    return historyContent;
+}
+
+function dateStamp(){
+  var date = new Date();
+  var month = (date.getMonth()+1).toString().length == 1 ? ("0" + parseInt(date.getMonth()+1)) : date.getMonth()+1;
+  var day = date.getDate().toString().length == 1 ? ("0" + date.getDate()) : date.getDate();
+  return date.getFullYear() + "-" + month + "-" + day;
 }
