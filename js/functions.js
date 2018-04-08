@@ -261,8 +261,8 @@ function toggleHistory(){
 }
 
 function manualSearch(){
-  var isbn = document.getElementById("number");
-  searchEbay(isbn.value);
+  var isbn = document.getElementById("number").value;
+  searchEbay(isbn);
 }
 
 function formHistory(){
